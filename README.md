@@ -1,2 +1,6 @@
 # onestop-cybershop
 Simple CLI Utility for Cyber Security professionals
+This app came to my mind a long time ago while in the college, with the goal of creating a simple, lightweight, but useful command‑line tool for cybersecurity professionals. It’s designed to be easy to run, easy to understand, and practical for everyday security tasks, without unnecessary complexity. For the time being, the main focus is text hashing (Option 1) using the SHA‑256 algorithm, allowing users to quickly generate a checksum for any string they type. If the user accidentally submits an empty string, the program warns them and lets them choose to either continue or return to the main menu.
+Looking ahead, I’m actively working on expanding the tool into a small “one‑stop shop” menu that also includes file hashing, hash comparison, and login generation from a text file containing first and second names. Features that can be helpful during reconnaissance and penetration testing. The login feature generates two lowercase username patterns (first letter of name + second name, and first name + first letter of second name) and writes them to an output file for easy use. More to come :)
+
+<img width="487" height="189" alt="image" src="https://github.com/user-attachments/assets/ce62f6db-0c3f-4337-948b-ad364e516422" />
