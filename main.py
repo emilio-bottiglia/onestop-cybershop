@@ -1,4 +1,5 @@
 """OneStop-CyberShop  Simple CLI Utility. see README for additional info"""
+"""v1.01 - See Changelog.md for details"""
 
 import hashlib       
 from pathlib import Path
@@ -38,7 +39,7 @@ def ask_back_or_quit() :
 
 #compute SHA-256 hash of a text string
 #return a hex digest
-def sha256_of_text():
+def sha256_of_text(text):
     #convert the string to bytes.
     data = text.encode('utf-8')
     #compute the digest.
