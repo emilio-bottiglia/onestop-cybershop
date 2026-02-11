@@ -17,7 +17,6 @@ logo = """
 
 """
 
-
 def show_menu():
     print(logo)
     print("Welcome to OneStop-CyberShop 1.0 Simple CLI Utility")
@@ -32,8 +31,8 @@ def show_menu():
 def ask_back_or_quit() :
     user = input("Press Enter to return to the menu, or Q to quit: ")
     #normalize the input (trim spaces, make lower-case).
-    user = user.strip().lower()
-    if user == 'q':
+    user_choice = user.strip().lower()
+    if user_choice == 'q':
         return 'quit'
     return 'back'
 
@@ -45,6 +44,25 @@ def sha256_of_text(text):
     #compute the digest.
     digest = hashlib.sha256(data).hexdigest()
     return digest
+
+#compute SHA-256 hash of a file, read file in small chunks
+#return a hex digest
+def sha256_of_file(file_path):
+    # create a hash object
+    hash_object = hashlib.sha256()
+    #pen the file in binary mode
+    with open(file_path, 'rb') as f:
+        #read chunks until the file ends
+        while True:
+            #read a chunk of bytes
+            chunk = f.read(4096)
+            # Step 3b: If chunk is empty, we reached end-of-file.
+            if not chunk: #chuck empty,file ended
+                break
+            #add the chunk to the hash calculator.
+            hash_object.update(chunk)
+    #convert the final hash to a hex string
+    return hash_object.hexdigest()
 
 #ask user for text, hash it with SHA-256
 # display result
@@ -59,7 +77,7 @@ def option_hash_text():
         print("what would you like to do?")
         print("  C) Continue (hash empty string)")
         print("  B) Back to main menu")
-        #we keep asking until we get a valid answer
+        #keep asking until we get a valid answer
         while True:
             choice = input("Your choice (C or B): ").strip().lower()
             if choice == 'b':
@@ -68,29 +86,78 @@ def option_hash_text():
                 break
             #if user doesn't enter b or c, ask again.
             print("Please type C to continue or B to go back.")
-
     #if text entered is a valid string, compute SHA-256 digest
     digest = sha256_of_text(text)
     print(f"SHA-256: {digest}")
-    #call ask_back_or_quit() to go back or quit.
+    #call ask_back_or_quit() to go back or quit
+    return ask_back_or_quit()
+
+#ask user for a file path, hash it with SHA-256
+# display result
+def option_hash_file():
+    print("--- SHA-256 for File ---")
+
+    #keep asking until we get a valid path
+    while True:
+        file_path = input("Enter file path to hash: ")
+
+        #emove double quotes from the ends
+        remove_double_q = file_path.strip('"')
+
+        #remove single quotes from the ends
+        remove_single_q = remove_double_q.strip("'")
+
+        #create a Path object
+        path_obj = Path(remove_single_q)
+
+        #validate it exists and is a file
+        if path_obj.is_file():
+            break
+
+        #if invalid loop again
+        print("File not found. Please check the path and try again.")
+
+    #exception handling
+    try:
+        #ompute the file SHA-256
+        digest = sha256_of_file(remove_single_q)
+
+        print(f"SHA-256: {digest}")
+
+        #lack of access
+    except PermissionError:
+        print("Error: Permission denied when trying to read the file.")
+
+        # other input/output problems.
+    except OSError as e:
+        print(f"Error: Could not read the file ({e}).")
+
+    #call ask_back_or_quit() to go back or quit
     return ask_back_or_quit()
 
 
-# this is the program entry point
 def main():
     while True:
         show_menu()
-        #normalise user choice
+        #normalize user choice
         choice = input("Choose an option: ").strip().lower()
+
         if choice == '1':
-            #call option_hash_text
+            #call option_hash_text.
+            #result hold value of "return ask_back_or_quit()"
             result = option_hash_text()
+
+        elif choice == '2':
+            result = option_hash_file()
+
         elif choice == 'q':
             print("Goodbye!")
             break
         else:
             print("Invalid choice. Please try again.")
+            sleep(1)
             continue
+
         if result == 'quit':
             print("Goodbye!")
             break
