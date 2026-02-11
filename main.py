@@ -1,5 +1,5 @@
 """OneStop-CyberShop  Simple CLI Utility. see README for additional info"""
-"""v1.01 - See Changelog.md for details"""
+"""v1.1 - See Changelog.md for details"""
 
 import hashlib       
 from pathlib import Path
