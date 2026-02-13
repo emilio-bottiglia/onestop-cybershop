@@ -136,6 +136,42 @@ def option_hash_file():
     #call ask_back_or_quit() to go back or quit
     return ask_back_or_quit()
 
+#compare two checksums provided by user
+def option_compare_hashes():
+    print("--- Compare Checksums ---")
+    print("Enter two checksums separated by a colon (:)")
+    print("Example: abc123:abc123")
+
+    #keep asking until input is valid
+    while True:
+        get_checksum = input("Checksums: ")
+
+        #check colon
+        if ":" not in get_checksum:
+            print("Please include a colon -> : between the two checksums.")
+            continue
+
+        #split left and right checksum
+        left_checksum, right_checksum = get_checksum.split(":", 1)
+
+        #normalize both sides
+        left_checksum = left_checksum.strip().lower()
+        right_checksum = right_checksum.strip().lower()
+
+        #check both sides exist
+        if left_checksum == "" or right_checksum == "":
+            print("Both checksum values must be non-empty. Try again.")
+            continue
+        #compare and print output
+        if left_checksum == right_checksum:
+            print("Result: MATCH")
+        else:
+            print("Result: NOT MATCH")
+        #exit the loop after a valid comparison
+        break
+    #call ask_back_or_quit() to go back or quit
+    return ask_back_or_quit()
+
 
 def main():
     while True:
@@ -150,6 +186,9 @@ def main():
 
         elif choice == '2':
             result = option_hash_file()
+
+        elif choice == '3':
+            result = option_compare_hashes()
 
         elif choice == 'q':
             print("Goodbye!")
