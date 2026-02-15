@@ -1,5 +1,8 @@
 # Changelog
-## v1.1 - 2026-11-10
+## v1.2 - 2026-02-15
+### Added
+-Add additional module option_compare_hashes(). User provide 2 checksum to compare. Return MATCH or NOT MATCH
+## v1.1 - 2026-02-11
 ### Added
 -Add additional module option_hash_file(). Ask user a file path and hash with SHA-256
 ## v1.01 - 2026-02-10

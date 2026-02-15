@@ -1,5 +1,5 @@
-"""OneStop-CyberShop  Simple CLI Utility. see README for additional info"""
-"""v1.1 - See Changelog.md for details"""
+"""OneStop-CyberShop  Simple CLI Utility by Emilio Bottiglia. See README for additional info"""
+"""v1.2 - See Changelog.md for details"""
 
 import hashlib       
 from pathlib import Path
@@ -20,7 +20,7 @@ logo = """
 
 def show_menu():
     print(logo)
-    print("Welcome to OneStop-CyberShop 1.0 Simple CLI Utility")
+    print("Welcome to OneStop-CyberShop 1.2 Simple CLI Utility by Emilio Bottiglia")
     #menu options.
     print("1) Create SHA-256 checksum for text")
     print("2) Create SHA-256 checksum for a file")
@@ -136,6 +136,46 @@ def option_hash_file():
     #call ask_back_or_quit() to go back or quit
     return ask_back_or_quit()
 
+#compare two checksums provided by user
+def option_compare_hashes():
+    print("--- Compare Checksums ---")
+    print("Enter two checksums separated by a colon (:)")
+    print("Example: abc123:abc123")
+
+    #keep asking until input is valid
+    while True:
+        get_checksum = input("Checksums: ")
+
+        #check colon
+        if ":" not in get_checksum:
+            print("Please include a colon -> : between the two checksums.")
+            continue
+
+        #split left and right checksum
+        split_string = get_checksum.split(":", 1)
+        #befor colon
+        left_checksum = split_string[0]
+        #after colon
+        right_checksum = split_string[1]
+
+        #normalize both sides
+        left_checksum = left_checksum.strip().lower()
+        right_checksum = right_checksum.strip().lower()
+
+        #check both sides exist
+        if left_checksum == "" or right_checksum == "":
+            print("Please consider both checksum values cannot be empty. Try again.")
+            continue
+        #compare and print output
+        if left_checksum == right_checksum:
+            print("Result: MATCH")
+        else:
+            print("Result: NOT MATCH")
+        #exit the loop after a valid comparison
+        break
+    #call ask_back_or_quit() to go back or quit
+    return ask_back_or_quit()
+
 
 def main():
     while True:
@@ -150,6 +190,9 @@ def main():
 
         elif choice == '2':
             result = option_hash_file()
+
+        elif choice == '3':
+            result = option_compare_hashes()
 
         elif choice == 'q':
             print("Goodbye!")
