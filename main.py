@@ -1,5 +1,5 @@
-"""OneStop-CyberShop  Simple CLI Utility. see README for additional info"""
-"""v1.1 - See Changelog.md for details"""
+"""OneStop-CyberShop  Simple CLI Utility by Emilio Bottiglia. See README for additional info"""
+"""v1.2 - See Changelog.md for details"""
 
 import hashlib       
 from pathlib import Path
@@ -20,7 +20,7 @@ logo = """
 
 def show_menu():
     print(logo)
-    print("Welcome to OneStop-CyberShop 1.0 Simple CLI Utility")
+    print("Welcome to OneStop-CyberShop 1.2 Simple CLI Utility by Emilio Bottiglia")
     #menu options.
     print("1) Create SHA-256 checksum for text")
     print("2) Create SHA-256 checksum for a file")

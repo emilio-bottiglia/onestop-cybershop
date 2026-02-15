@@ -1,5 +1,5 @@
 # Changelog
-## v1.2 - 2026-02-14
+## v1.2 - 2026-02-15
 ### Added
 -Add additional module option_compare_hashes(). User provide 2 checksum to compare. Return MATCH or NOT MATCH
 ## v1.1 - 2026-02-11
