@@ -152,7 +152,11 @@ def option_compare_hashes():
             continue
 
         #split left and right checksum
-        left_checksum, right_checksum = get_checksum.split(":", 1)
+        split_string = get_checksum.split(":", 1)
+        #befor colon
+        left_checksum = split_string[0]
+        #after colon
+        right_checksum = split_string[1]
 
         #normalize both sides
         left_checksum = left_checksum.strip().lower()
@@ -160,7 +164,7 @@ def option_compare_hashes():
 
         #check both sides exist
         if left_checksum == "" or right_checksum == "":
-            print("Both checksum values must be non-empty. Try again.")
+            print("Please consider both checksum values cannot be empty. Try again.")
             continue
         #compare and print output
         if left_checksum == right_checksum:
